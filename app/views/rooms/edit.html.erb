@@ -1,0 +1,9 @@
+<div class="container">
+<h1>Editing Room</h1>
+
+<%= render 'form' %>
+<% if user_signed_in? %> 
+<%= link_to 'Show', @room %> |
+<%= link_to 'Back', rooms_path %>
+<% end %>
+</div>

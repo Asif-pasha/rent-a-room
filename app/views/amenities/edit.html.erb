@@ -1,0 +1,7 @@
+<h1>Editing Amenity</h1>
+
+<%= render 'form' %>
+<% if user_signed_in? %> 
+<%= link_to 'Show', @amenity %> |
+<%= link_to 'Back', amenities_path %>
+<% end %>

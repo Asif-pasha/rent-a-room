@@ -1,0 +1,41 @@
+
+<div class="container">
+<div class="page-header">
+<h1>Listing Rooms</h1>
+
+
+<div class="row">
+    <% @rooms.each do |room| %>
+      <% if room.is_authorized == true %>
+          <div class="col-md-4">
+          <p class="text-justify" color= "black">
+              
+              <h4 class="text-center"><font face="Chancery Cursive"> <%= room.name %></font></br></h4>
+              <%= link_to (image_tag room.image ,:size => '360x240'), room %><br/><br/>
+              <label>Description</label>
+              <%= room.description %><br/>
+              <label>price</label>
+              <%= room.price %><br/>
+              <label>Rules</label>
+              <%= room.rules %><br/>
+              <label>Address</label>
+              <%= room.address %><br/>
+              <label>Latitude</label>
+              <%= room.latitude %><br/>
+              <label>Longitude</label>
+              <%= room.longitude %><br/>
+              <b ><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></b>
+              </p>
+        </div>
+      <% end %>
+    <% end %>  
+</div>
+
+<div class="row">
+<% if user_signed_in?  %> 
+<h2> Add new Room</h2>
+<%= link_to 'New Room', new_room_path %>
+<% end %>
+</div>
+</div>
+</div>

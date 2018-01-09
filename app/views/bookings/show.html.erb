@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-2"></div>
+        <div class="col-md-10">
+          <h2 >your room has booked for <%= (@booking.start_date..@booking.end_date).count %> day</h2>
+
+    
+        <h4><strong>Start date:</strong>
+    <%= @booking.start_date %>
+    </h4>
+    
+
+    
+
+        <h4> <strong>End date:</strong>
+  <%= @booking.end_date %></h4>
+
+    
+
+        <h4><strong>User:</strong>
+  <%= @booking.user.username %></h4>
+
+
+
+
+        <h4><strong>Room:</strong>
+  <%= @booking.room.name %></h4>
+
+
+   
+
+
+        <h4><strong>Price:</strong>
+          <%= @booking.price %></h4>
+
+
+<% if user_signed_in? && current_user.role == "Admin" %> 
+<%= link_to 'Edit', edit_booking_path%> |
+<%= link_to 'Back', bookings_path %>
+<%end%>
+  
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<h2>Not confirmed Rooms</h2>
+
+
+	<% if @bookings.empty?%>
+		<b>All the rooms are confirmed </b>
+	<%else%>
+		<ul>
+			<% @bookings.each do |book|%>
+				<%if book.is_confirmed == false %> 
+					<li><%= book.room.name %> - 
+					<%=book.room.address%> - <%=book.room.city.name %>
+					</li>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>price</th>
+							</tr>
+						</thead>
+						<tbody>
+							<td><%=book.start_date%></td>
+							<td><%=book.end_date%></td>
+							<td><%=book.price%></td>
+						</tbody>
+					</table>
+
+
+						<%= form_for book do |f|%>
+
+						<%= f.hidden_field :is_confirmed, value:true %>
+						<%=f.submit "confirm Room" %> 
+						<br/>
+					<br/>
+						<%end%>
+				<% end %>
+			<%end%>
+	<%end%>
+		</ul>

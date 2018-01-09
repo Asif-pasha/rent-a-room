@@ -1,0 +1,57 @@
+<div class= "container">
+<%= form_for(@room) do |f| %>
+  <% if @room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+      <% @room.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %><br>
+    <%= f.text_area :description ,class: "form-control"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :price %><br>
+    <%= f.text_field :price,class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :rules %><br>
+    <%= f.text_field :rules,class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :address %><br>
+    <%= f.text_field :address,class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :image %><br>
+    <%= f.file_field :image,class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :latitude %><br>
+    <%= f.text_field :latitude,class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :longitude %><br>
+    <%= f.text_field :longitude,class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :city_id %><br>
+ <%= f.collection_select :city_id, City.all, :id, :name, prompt: "Select City" %>
+  </div>
+  <h3>Select Amenities</h3>
+  <%= f.collection_check_boxes :amenity_ids, Amenity.all, :id, :name %>
+  <div class="actions">
+    <%= f.submit  %>
+  </div>
+<% end %>
+</div>

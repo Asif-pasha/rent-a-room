@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RenrARoom</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"type="text/javascript"></script>
+  <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.2/chosen.jquery.min.js" type="text/javascript"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.2/chosen.css" rel="stylesheet" />
+  <href src ="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css" rel="stylesheet" />
+</head>
+<body>
+<nav class="navbar navbar-default navbar-light bg-faded" style="background-color: #f2cea4;">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header" >
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"> Rent  Room
+      <!-- <img src="rent.png" height="90" width="90" class="img-thumbnail" alt="Rent A Room">  -->
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cities</i> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          <% City.all.each do |city| %>
+        <li><%= link_to city.name ,city%></li>
+          <% end %>
+        
+        </ul>
+        </li>
+        <li><%= link_to "Rooms",rooms_path %></li>
+        <%if user_signed_in? && current_user.role.name ==  "Admin" %>
+        <li><%= link_to "Authorize",rooms_authorize_path %></li>
+        <% end %>
+        <%if user_signed_in? && current_user.role.name ==  "Admin" %>
+        <li><%= link_to "Unauthorize",rooms_unauthorize_path %></li>
+        <% end %>
+        <%if user_signed_in? && (current_user.role.name ==  "Host" || current_user.role.name ==  "Admin" )%>
+        <li> <%= link_to "Myrooms", rooms_Myrooms_path %></li>
+        <% end %>
+        <%if user_signed_in? %>
+        <li> <%=link_to "MyBookings",bookings_mybookings_path %></li>
+          <%if user_signed_in? && (current_user.role.name ==  "Host" || current_user.role.name ==  "Admin" )%>
+        <li><%= link_to "confirmation" ,bookings_confirmation_path %></li>
+        <% end %>
+        <% end %>
+      </ul>
+      <!-- <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form> -->
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          <% if user_signed_in? %>
+          <li><b><%= current_user.username %>(<%= current_user.role.name %>)</b></li>
+
+          <li><%=link_to edit_user_registration_path do %>
+            <i class="glyphicon glyphicon-cog">Account settings</i>
+            <%end%>
+          </li>
+            <li><%= link_to destroy_user_session_path, method: :delete ,data: {Confirm: 'Are you sure'} do %>
+              <i class="glyphicon glyphicon-log-out">Logout</i>
+              <% end %>
+            </li>
+        <% else %>
+    <li><%= link_to "Login", new_user_session_path %> </li>
+    <li> <%= link_to "Register", new_user_registration_path %></li>
+      <% end %>
+            
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<%= yield %>
+</body>
+</html>

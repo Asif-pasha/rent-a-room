@@ -1,0 +1,41 @@
+<div class="row">
+<div class="col-md-6">	
+	<div class="page-header text-center">
+		<h2> My rooms </h2>
+	</div>
+	</div>
+	</div>
+<div class="col-md-6">
+<% if user_signed_in? %>
+<% if @rooms.empty? %>
+	<b>You have not added any rooms</b>
+<%else%>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Room Name</th>
+				<th>Adderss</th>
+				<th>Price</th>
+				<th>Authorized</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @rooms.each do |room|%>
+				<tr>
+					<td><%= link_to room.name %></td>
+					<td><%= room.address %></td>
+					<td><%= room.price %></td>
+					<td><% if room.is_authorized? %> Yes <%else%> No <%end%></td>
+				</tr>
+			<%end%>
+		</tbody>
+	</table>
+	
+<%end%>
+
+<% end %>
+
+</div>
+<div class="col-md-6">
+	
+</div>
