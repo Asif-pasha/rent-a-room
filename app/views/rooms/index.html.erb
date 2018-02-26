@@ -24,8 +24,10 @@
               <%= room.latitude %><br/>
               <label>Longitude</label>
               <%= room.longitude %><br/>
+              <% if user_signed_in? && (current_user.role.name ==  "Host" || current_user.role.name ==  "Admin" ) %>
               <b ><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></b>
               </p>
+              <% end %>
         </div>
       <% end %>
     <% end %>  
