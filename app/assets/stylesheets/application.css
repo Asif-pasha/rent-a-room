@@ -13,3 +13,34 @@
  *= require_tree .
  *= require_self
  */
+
+
+ @import "main";
+ @import "bootstrap";
+ 
+/* #noticeWrapper
+ {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 999;
+	background: rgba(135,216,211,0.05);
+	.notice,.alert{
+		padding: 2.5rem 0;
+		text-align: center;
+		margin: 0;
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: #FFFFFF;
+		letter-spacing: 1px;
+	} 	
+ }*/
+ body{
+ 	background: url(/images.jpeg);
+ 	text-color:white;
+ }
+ .color
+ {
+ 	tex
+ }
+

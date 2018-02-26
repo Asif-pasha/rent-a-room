@@ -3,14 +3,20 @@
 <%else%>
 	<ul>
 	<% @rooms.each do |room|%>
-		<li><%= room.name%>
+		<%= room.name%>
 			<%=room.address%>
 			<%= room.price%>
-		</li>
-		<%= form_for room do |f|%>
+		
+		<br/>
+				<%= form_for room do |f|%>
 		<%= f.hidden_field :is_authorized, value: "true"%>
-		<%= f.submit "authorize" %>
+		<%= f.submit "authorize",class:"btn btn-primary pull-left" %>
 		<% end %>
+				<%= form_for room do |f|%>
+		<%= f.hidden_field :is_authorized, value: "false"%>
+		<%= f.submit "Unauthorize",class:"btn btn-primary" %>
+		<% end %>
+		<br/>
 	<% end %>
 	</ul>
 	<% end %>
